@@ -1,0 +1,12 @@
+/vocabularier
+    /data/
+        book1.db
+        book2.db
+    /src/
+        /vocabularier_lite
+            __init__.py
+            create_database.py
+            main.py
+            my_exception.py
+            vocabularier_lite.log
+            bocabulary_lite.py
