@@ -102,9 +102,9 @@ class Interface():
         clean()
 
     def main_menu(self):
-        clean()
         print(f'Your now in {self.database_name}')
         while self.mode == Mode.MAIN:
+            clean()
             print("-------------------------")
             print("Main Menu")
             print("Mode: (s) Studying Mode")
@@ -284,7 +284,7 @@ class Interface():
                 inputting = True
 
                 while inputting:
-                    typ = input("What is the part of speech? (seperate with ';' if many)").strip()
+                    typ = input("What is the part of speech? (seperate with ';' if many) ").strip()
                     if typ == 'q':
                         self.set_mode(Mode.MAIN)
                         break
@@ -295,7 +295,6 @@ class Interface():
                         typ_corr = True
                         if t == 'a':  # valid type, keep on checking other types
                             t = 'adj'
-                            t = re.sub('a;', 'adj;', typ)
                             types.append(t)
                         elif t not in ('n', 'adj', 'adv', 'phr', 'v', 'prep', 'conj'):
                             typ_corr = False
@@ -307,6 +306,7 @@ class Interface():
                             break
                         else:  # fit the constrain
                             types.append(t)
+                    typ = ';'.join(types)
                     if typ_corr is True:
                         inputting = False
                 if typ == 'q':
@@ -315,7 +315,7 @@ class Interface():
 
                 while inputting:
                     chi = input(
-                        "What is the meaning in Chinese? (seperate with ';' if many)").strip()
+                        "What is the meaning in Chinese? (seperate with ';' if many) ").strip()
                     if chi == 'q':
                         self.set_mode(Mode.MAIN)
                         break
@@ -341,7 +341,7 @@ class Interface():
                 inputting = True
 
                 while inputting:
-                    sent = input("Enter an example sentence! (seperate with ';' if many)").strip()
+                    sent = input("Enter an example sentence! (seperate with ';' if many) ").strip()
                     if sent == 'q':
                         self.set_mode(Mode.MAIN)
                         break
@@ -508,8 +508,8 @@ class Interface():
     def testing_mode(self):
         with VocabularyBook(self.database_name) as vocb:
             self.set_mode(Mode.TEST)
+            clean()
             while self.mode == Mode.TEST:
-                clean()
                 print("-------------------------")
                 print("Testing Mode")
                 print("Mode: (1) English to Chinese")
@@ -547,4 +547,3 @@ if __name__ == '__main__':
         user_interface.main_menu()
     except Exception as e:
         logging.error("Exception occurred", exc_info=True)
-    input("Press any key to exit...")
